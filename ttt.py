@@ -15,6 +15,7 @@ class Game:
     def display_game(self):
         for row in [self.board[i*3:(i+1) * 3] for i in range(3)]:
             print('| ' + ' | '.join(row) + ' |')
+        print("")
     def move(self, value, position): #value being X or O and position being 0-8
         self.board[position] = value
     def check_set_winner(self, symbol):
@@ -39,11 +40,15 @@ class Game:
 # |  |  |  |
 # |  |  |  |
 p1 = Player('O')
+p2 = Player('X')
 g = Game()
 g.display_game()
 while not g.winner:
-    move_position = input("Your move, type a # from 0 - 8: ")
+    move_position = input(f"{p1.symbol}'s move, type a # from 0 - 8: ")
     g.move(p1.symbol, int(move_position))
+    g.display_game()
+    move_position = input(f"{p2.symbol}'s move, type a # from 0 - 8: ")
+    g.move(p2.symbol, int(move_position))
     g.display_game()
     g.check_set_winner(p1.symbol)
 if g.winner:
